@@ -27,6 +27,17 @@
       background: #fff;
     }
   </style>
+  .download-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #1e1e1e;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.download-btn:hover {
+  background-color: #333;
+}
 </head>
 <body>
   <header>
@@ -55,6 +66,7 @@
       <div id="poem-area" contenteditable="true">
         Start writing your poem here...
       </div>
+      <button class="download-btn" onclick="downloadPoem()">Download Poem</button>
     </div>
   </main>
 
@@ -73,5 +85,13 @@
       document.execCommand('fontName', false, this.value);
     });
   </script>
+  function downloadPoem() {
+  const content = document.getElementById("poem-area").innerHTML;
+  const blob = new Blob([content], { type: "text/html" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "my-poem.html";
+  link.click();
+}
 </body>
 </html>
